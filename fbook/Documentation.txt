@@ -1,0 +1,43 @@
+PROJECT_NAME: BOOKS_APIs_V1
+VERSION: 1.0
+TECHNOLGIES: Python/Flask, PostMan, VS code
+
+
+######## MODELS #########
+
+/#/ books(id: integer, isbn: string(10), titre: string(200), date_publication: date, auteur: string(200), éditeur: string(150), #categorie_id: integer)
+
+/#/ categories(id: integer, libelle_categorie: string(50))
+
+
+--- Fonctionnalités de la version 1 ---
+
+-- Lister tous les livres :   GET /books
+// Book.query.all()
+
+-- Chercher un livre en particulier par son id: GET /books/id
+// Book.query.filter(Book.id == id).all()
+
+-- Lister la liste des livres d'une categorie: GET /categories/id/books
+// 
+
+-- Lister une categorie: GET /id/categories --
+//
+
+-- Chercher une categorie par son id : GET /categories/id   *
+// Category.query.filter(Category.id == id).all()
+
+-- Lister toutes les categories: GET /categories    *
+// Category.query.all()
+
+-- Supprimer un livre : DELETE /books/id    *
+// book = Book.query.get(id)
+// book.delete()
+
+-- Supprimer une categorie : DELETE /categories/id  *
+// category = Category.query.get(id)
+// category.delete()
+
+-- Modifier les informations d'un livre : PATCH /books/id
+
+-- Modifier le libellé d'une categorie :  PATCH /categories/id
