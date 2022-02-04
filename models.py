@@ -1,14 +1,29 @@
-from connexion import app
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-
-db = SQLAlchemy(app)
-
-migrate = Migrate(app, db)
+from sqlalchemy import create_engine
 
 
-class Category():
+database = 'library'
+
+db_path = 'postgresql://{}:{}@{}/{}'.format(
+    'naud', 'naud.2002', 'localhost:5432', database)
+
+db = SQLAlchemy()
+
+
+def setup_db(app, path=db_path):
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_path
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.app = app
+    db.init_app(app)
+    db.create_all()
+
+
+class Category(db.Model):
+
     __tablename__ = 'categories'
+
     id_cat = db.Column(db.Integer, primary_key=True)
     libelle_categorie = db.Column(db.String(50))
     books = db.relationship('Book', backref='categories', lazy=True)
@@ -35,22 +50,25 @@ class Category():
 
 
 class Book(db.Model):
+
     __tablename__ = 'books'
+
     id_book = db.Column(db.Integer, primary_key=True)
     isbn = db.Column(db.String(12), nullable=False)
     titre = db.Column(db.String(200), nullable=False)
     date_publication = db.Column(db.String(10), nullable=False)
     auteur = db.Column(db.String(200), nullable=False)
-    editeur = db.Column(db.string(150), nullable=False)
-    categorie_id = db.Column(db.Integer, db.Foreignkey(
-        'categories.id_cat', nullable=False))
+    editeur = db.Column(db.String(150), nullable=False)
+    categorie_id = db.Column(db.Integer, db.ForeignKey(
+        'categories.id_cat'), nullable=False)
 
-    def __init__(self, isbn, titre, date_publication, auteur, editeur):
+    def __init__(self, isbn, titre, date_publication, auteur, editeur, categorie_id):
         self.isbn = isbn
         self.titre = titre
         self.date_publication = date_publication
         self.auteur = auteur
         self.editeur = editeur
+        self.categorie_id = categorie_id
 
     def insert(self):
         db.session.add(self)
@@ -72,6 +90,3 @@ class Book(db.Model):
             'editeur': self.editeur,
             'date_publication': self.date_publication
         }
-
-
-db.create_all()

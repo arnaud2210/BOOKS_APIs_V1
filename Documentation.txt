@@ -12,10 +12,10 @@ TECHNOLGIES: Python/Flask, PostMan, VS code
 
 --- Fonctionnalités de la version 1 ---
 
--- Lister tous les livres :   GET /books
+-- Lister tous les livres :   GET /books    *
 // Book.query.all()
 
--- Chercher un livre en particulier par son id: GET /books/id
+-- Chercher un livre en particulier par son id: GET /books/id   *
 // Book.query.filter(Book.id == id).all()
 
 -- Lister la liste des livres d'une categorie: GET /categories/id/books
@@ -38,6 +38,6 @@ TECHNOLGIES: Python/Flask, PostMan, VS code
 // category = Category.query.get(id)
 // category.delete()
 
--- Modifier les informations d'un livre : PATCH /books/id
+-- Modifier les informations d'un livre : PATCH /books/id   *
 
--- Modifier le libellé d'une categorie :  PATCH /categories/id
+-- Modifier le libellé d'une categorie :  PATCH /categories/id  *
