@@ -58,9 +58,17 @@ def create_app(test_config=None):
     # Lister la liste des livres d'une categorie
     ################################################
 
-    """@app.route('/categories/<int:id>/books')
+    @app.route('/books/categories/<int:id>')
     def book_category(id):
-        category = Category.query.get(id)"""
+        category = Category.query.get(id)
+        books = Book.query.filter_by(categorie_id=id).all()
+        books = paginate(books)
+        return jsonify({
+            'Success': True,
+            'Status_code': 200,
+            'classe': category.format(),
+            'books': books 
+        })
 
     #######################################
     # Lister toutes les categories
