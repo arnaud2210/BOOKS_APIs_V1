@@ -48,11 +48,8 @@ def create_app(test_config=None):
         if book is None:
             abort(404)
         else:
-            return jsonify({
-                'success': True,
-                'status_code': 200,
-                'book': book.format()
-            })
+            return book.format()
+            
 
     ################################################
     # Lister la liste des livres d'une categorie
@@ -98,25 +95,26 @@ def create_app(test_config=None):
         if category is None:
             abort(404)
         else:
-            return jsonify({
-                'success': True,
-                'status_code': 200,
-                'category': category.format()
-            })
-
+            return category.format()
+        
     ############################
     # Supprimer un livre
     ############################
 
     @app.route('/books/<int:id>', methods=['DELETE'])
     def del_book(id):
-        book = Book.query.get(id)
-        book.delete()
-        return jsonify({
-            'success': True,
-            'id_book': id,
-            'new_total': Book.query.count()
-        })
+        try:
+            book = Book.query.get(id)
+            book.delete()
+            return jsonify({
+                'success': True,
+                'id_book': id,
+                'new_total': Book.query.count()
+            })
+        except:
+            abort(404)
+        finally:
+            db.session.close()
 
     #############################
     # Supprimer une categorie
@@ -124,14 +122,19 @@ def create_app(test_config=None):
 
     @app.route('/categories/<int:id>', methods=['DELETE'])
     def del_category(id):
-        category = Category.query.get(id)
-        category.delete()
-        return jsonify({
-            'success': True,
-            'status': 200,
-            'id_cat': id,
-            'new_total': Category.query.count()
-        })
+        try:
+            category = Category.query.get(id)
+            category.delete()
+            return jsonify({
+                'success': True,
+                'status': 200,
+                'id_cat': id,
+                'new_total': Category.query.count()
+            })
+        except:
+            abort(404)
+        finally:
+            db.session.close()
 
     ###########################################
     # Modifier les informations d'un livre
@@ -147,14 +150,9 @@ def create_app(test_config=None):
                 book.auteur = body['auteur']
                 book.editeur = body['editeur']
             book.update()
-            return jsonify({
-                'success': True,
-                'status_code': 200,
-                'id': id,
-                'book': book.format()
-            })
+            return book.format()
         except:
-            abort(400)
+            abort(404)
 
     ########################################
     # Modifier le libellé d'une categorie
@@ -168,13 +166,18 @@ def create_app(test_config=None):
             if 'categorie' in body:
                 category.libelle_categorie = body['categorie']
             category.update()
-            return jsonify({
-                'success': True,
-                'status_code': 200,
-                'categorie': category.format()
-            })
+            return category.format()
         except:
-            abort(400)
+            abort(404)
+
+    @app.errorhandler(404)
+    def not_found(error):
+        return jsonify({
+            'success': False,
+            'error': 404,
+            'message': "Ressource non disponible"
+        }), 404
+
 
     return app
 
