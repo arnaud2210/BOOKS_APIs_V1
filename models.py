@@ -1,11 +1,14 @@
+import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
-
+from dotenv import load_dotenv
+load_dotenv()
 
 database = 'library'
+passw = os.getenv('db_pass')
 
 db_path = 'postgresql://{}:{}@{}/{}'.format(
-    'naud', 'naud.2002', 'localhost:5432', database)
+    'naud', passw, 'localhost:5432', database)
 
 db = SQLAlchemy()
 
