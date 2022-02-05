@@ -13,7 +13,7 @@ Suivez les instructions suivantes pour installer l'ancienne version de python su
 
 Pour installer les dépendances, ouvrez le dossier `/Documentation` et exécuter la commande suivante:
 
-```bash
+```bash ou powershell ou cmd
 pip install -r requirements.txt
 or
 pip3 install -r requirements.txt
@@ -73,8 +73,8 @@ L'API voue renvoie 4 types d'erreur:
         Cet endpoint retourne la liste des objets livres, la valeur du succès et le total des livres. 
     
         
-    SAMPLE: curl http://localhost:5000/books
-
+    EXEMPLE: curl http://localhost:5000/books
+```
         {
     "books": [
         {
@@ -116,7 +116,7 @@ L'API voue renvoie 4 types d'erreur:
 }
 ```
 
-##GET/books(book_id)
+.##GET/books(book_id)
   GENERAL:
   Cet endpoint permet de récupérer les informations d'un livre particulier s'il existe par le biais de l'ID.
 
@@ -231,7 +231,7 @@ L'API voue renvoie 4 types d'erreur:
 }
 ```
 
-##GET/categories(categorie_id)
+.##GET/categories(categorie_id)
   GENERAL:
   Cet endpoint permet de récupérer les informations d'une categorie si elle existe par le biais de l'ID.
 
@@ -242,8 +242,6 @@ L'API voue renvoie 4 types d'erreur:
         "id": 6
     }
 ```
-
- 
 
 . ## DELETE/categories (categories_id)
 
@@ -274,7 +272,7 @@ L'API voue renvoie 4 types d'erreur:
         "id": 4
     }
 
-##GET/books/categories(categorie_id)
+.##GET/books/categories(categorie_id)
   GENERAL:
   Cet endpoint permet de lister les livres appartenant à une categorie donnée.
   Il renvoie la classe de la categorie et les livres l'appartenant.
