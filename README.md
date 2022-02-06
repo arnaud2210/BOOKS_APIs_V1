@@ -60,7 +60,7 @@ Les erreurs sont renvoyées sou forme d'objet au format Json:
     "message":"Ressource non disponible"
 }
 
-L'API voue renvoie 4 types d'erreur:
+L'API vous renvoie 4 types d'erreur:
 . 400: Bad request ou ressource non disponible
 . 500: Internal server error
 . 422: Unprocessable
