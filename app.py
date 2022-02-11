@@ -29,16 +29,16 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
         return response
 
-    @app.route('/v1/')
+    """@app.route('/v1/')
     def welcome():
         return jsonify({
             "message": "WELCOME !",
             "name": "bookapi",
             "version": 1,
             "read":"https://github.com/arnaud2210/BOOKS_APIs_V1"
-        })
+        })"""
 
-    @app.route('/v1/books')
+    @app.route('/books')
     def get_books():
         try:
             books = Book.query.all()
@@ -58,7 +58,7 @@ def create_app(test_config=None):
     # Chercher un livre en particulier par son id
     #################################################
 
-    @app.route('/v1/books/<int:id>')
+    @app.route('/books/<int:id>')
     def get_book(id):
         book = Book.query.get(id)
         if book is None:
@@ -71,7 +71,7 @@ def create_app(test_config=None):
     # Lister la liste des livres d'une categorie
     ################################################
 
-    @app.route('/v1/books/categories/<int:id>')
+    @app.route('/categories/<int:id>/books')
     def book_category(id):
         try:
             category = Category.query.get(id)
@@ -93,7 +93,7 @@ def create_app(test_config=None):
     # Lister toutes les categories
     #######################################
 
-    @app.route('/v1/categories')
+    @app.route('/categories')
     def get_categories():
         categories = Category.query.all()
         categories = paginate(categories)
@@ -111,7 +111,7 @@ def create_app(test_config=None):
     # Chercher une categorie par son id
     ########################################
 
-    @app.route('/v1/categories/<int:id>')
+    @app.route('/categories/<int:id>')
     def get_category(id):
         category = Category.query.get(id)
         if category is None:
@@ -123,7 +123,7 @@ def create_app(test_config=None):
     # Supprimer un livre
     ############################
 
-    @app.route('/v1/books/<int:id>', methods=['DELETE'])
+    @app.route('/books/<int:id>', methods=['DELETE'])
     def del_book(id):
         try:
             book = Book.query.get(id)
@@ -142,7 +142,7 @@ def create_app(test_config=None):
     # Supprimer une categorie
     #############################
 
-    @app.route('/v1/categories/<int:id>', methods=['DELETE'])
+    @app.route('/categories/<int:id>', methods=['DELETE'])
     def del_category(id):
         try:
             category = Category.query.get(id)
@@ -162,7 +162,7 @@ def create_app(test_config=None):
     # Modifier les informations d'un livre
     ###########################################
 
-    @app.route('/v1/books/<int:id>', methods=['PATCH'])
+    @app.route('/books/<int:id>', methods=['PATCH'])
     def change_book(id):
         body = request.get_json()
         book = Book.query.get(id)
@@ -180,7 +180,7 @@ def create_app(test_config=None):
     # Modifier le libellé d'une categorie
     ########################################
 
-    @app.route('/v1/categories/<int:id>', methods=['PATCH'])
+    @app.route('/categories/<int:id>', methods=['PATCH'])
     def change_name(id):
         body = request.get_json()
         category = Category.query.get(id)
@@ -195,7 +195,7 @@ def create_app(test_config=None):
     ##############################################
     # Rechercher un livre par son titre ou son auteur
     ##############################################
-    @app.route('/v1/books/<string:word>')
+    @app.route('/books/<string:word>')
     def search_book(word):
         mot = '%'+word+'%'
         titre = Book.query.filter(Book.titre.like(mot)).all()
