@@ -80,6 +80,7 @@ def create_app(test_config=None):
             return jsonify({
                 'Success': True,
                 'Status_code': 200,
+                'total': len(books),
                 'classe': category.format(),
                 'books': books 
             })

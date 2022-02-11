@@ -93,3 +93,4 @@ class Book(db.Model):
             'editeur': self.editeur,
             'date_publication': self.date_publication
         }
+
