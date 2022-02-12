@@ -204,7 +204,7 @@ def create_app(test_config=None):
             'books': titre
         })
     
-    @app.route('/books', methods=['POST'])
+    @app.route('/categories', methods=['POST'])
     def add_book():
         body = request.get_json()
         new_categorie = body['libelle_categorie']
