@@ -221,7 +221,7 @@ def create_app(test_config=None):
     @app.route('/books', methods=['POST'])
     def add_book():
         body = request.get_json()
-        isbn = body['isbn']
+        isbn = body['code_ISBN']
         new_titre = body['titre']
         new_date = body['date_publication']
         new_auteur = body['auteur']
