@@ -203,6 +203,36 @@ def create_app(test_config=None):
         return jsonify({
             'books': titre
         })
+    
+    @app.route('/books', methods=['POST'])
+    def add_book():
+        body = request.get_json()
+        new_categorie = body['libelle_categorie']
+        category = Category(libelle_categorie=new_categorie)
+        category.insert()
+        return jsonify({
+            'success': True,
+            'added': category.format(),
+            'total_categories': Category.query.count()
+        })
+
+    @app.route('/books', methods=['POST'])
+    def add_book():
+        body = request.get_json()
+        new_titre = body['titre']
+        new_date = body['date_publication']
+        new_auteur = body['auteur']
+        new_editeur = body['editeur']
+        categorie_id = body['categorie_id']
+        book = Book(titre=new_titre, date_publication=new_date,
+                    auteur=new_auteur, editeur=new_editeur, new_categorie=categorie_id)
+        book.insert()
+        count = Book.query.count()
+        return jsonify({
+            'success': True,
+            'added': book.format(),
+            'total_books': count,
+        })
 
     @app.errorhandler(404)
     def not_found(error):
