@@ -219,13 +219,13 @@ def create_app(test_config=None):
     @app.route('/books', methods=['POST'])
     def add_book():
         body = request.get_json()
-        new_isbn = body['code_isbn']
+        new_isbn = body['isbn']
         new_titre = body['titre']
         new_date = body['date_publication']
         new_auteur = body['auteur']
         new_editeur = body['editeur']
         categorie_id = body['categorie_id']
-        book = Book(code_isbn=new_isbn,titre=new_titre, date_publication=new_date,
+        book = Book(isbn=new_isbn,titre=new_titre, date_publication=new_date,
                     auteur=new_auteur, editeur=new_editeur, new_categorie=categorie_id)
         book.insert()
         count = Book.query.count()
