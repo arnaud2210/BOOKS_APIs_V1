@@ -17,6 +17,7 @@ def paginate(request):
 # Lister tous les livres
 ##############################
 
+
 def create_app(test_config=None):
     app = Flask(__name__)
     setup_db(app)
@@ -25,8 +26,10 @@ def create_app(test_config=None):
 
     @app.after_request
     def after_request(response):
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+        response.headers.add('Access-Control-Allow-Headers',
+                             'Content-Type,Authorization,true')
+        response.headers.add('Access-Control-Allow-Methods',
+                             'GET,PUT,POST,DELETE,OPTIONS')
         return response
 
     """@app.route('/v1/')
@@ -65,7 +68,6 @@ def create_app(test_config=None):
             abort(404)
         else:
             return book.format()
-            
 
     ################################################
     # Lister la liste des livres d'une categorie
@@ -82,7 +84,7 @@ def create_app(test_config=None):
                 'Status_code': 200,
                 'total': len(books),
                 'classe': category.format(),
-                'books': books 
+                'books': books
             })
         except:
             abort(404)
@@ -118,7 +120,7 @@ def create_app(test_config=None):
             abort(404)
         else:
             return category.format()
-        
+
     ############################
     # Supprimer un livre
     ############################
@@ -191,7 +193,7 @@ def create_app(test_config=None):
             return category.format()
         except:
             abort(404)
-    
+
     ##############################################
     # Rechercher un livre par son titre ou son auteur
     ##############################################
@@ -203,7 +205,7 @@ def create_app(test_config=None):
         return jsonify({
             'books': titre
         })
-    
+
     @app.route('/categories', methods=['POST'])
     def add_category():
         body = request.get_json()
@@ -219,13 +221,13 @@ def create_app(test_config=None):
     @app.route('/books', methods=['POST'])
     def add_book():
         body = request.get_json()
-        new_isbn = body['isbn']
+        isbn = body['isbn']
         new_titre = body['titre']
         new_date = body['date_publication']
         new_auteur = body['auteur']
         new_editeur = body['editeur']
         categorie_id = body['categorie_id']
-        book = Book(isbn=new_isbn,titre=new_titre, date_publication=new_date,
+        book = Book(isbn=isbn, titre=new_titre, date_publication=new_date,
                     auteur=new_auteur, editeur=new_editeur, new_categorie=categorie_id)
         book.insert()
         count = Book.query.count()
@@ -242,7 +244,6 @@ def create_app(test_config=None):
             'error': 404,
             'message': "Ressource non disponible"
         }), 404
-
 
     return app
 
