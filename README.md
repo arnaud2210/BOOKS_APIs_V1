@@ -73,7 +73,7 @@ L'API vous renvoie 4 types d'erreur:
         Cet endpoint retourne la liste des objets livres, la valeur du succès et le total des livres. 
     
         
-    EXEMPLE: curl http://localhost:5000/books
+    EXEMPLE: curl https://bookapi-v1.herokuapp.com/books
 ```
         {
     "books": [
@@ -120,7 +120,7 @@ L'API vous renvoie 4 types d'erreur:
   GENERAL:
   Cet endpoint permet de récupérer les informations d'un livre particulier s'il existe par le biais de l'ID.
 
-    EXEMPLE: http://localhost:5000/books/3
+    EXEMPLE: https://bookapi-v1.herokuapp.com/books/3
 ```
     {
         "auteur": "Louis Saulnier, Théodore Gringoire",
@@ -138,7 +138,7 @@ L'API vous renvoie 4 types d'erreur:
     GENERAL:
         Supprimer un element si l'ID existe. Retourne l'ID du livre supprimé, la valeur du succès et le nouveau total.
 
-        EXEMPLE: curl -X DELETE http://localhost:5000/books/4
+        EXEMPLE: curl -X DELETE https://bookapi-v1.herokuapp.com/books/4
 ```
     {
         "id_book": 4,
@@ -153,7 +153,7 @@ L'API vous renvoie 4 types d'erreur:
   Il retourne un livre mis à jour.
 
   EXEMPLE.....Avec Patch
-  ``` curl -X PATCH http://localhost:5000/books/1 -H "Content-Type:application/json" -d '{"auteur": "Azychika, Takumi Fukui","editeur": "Ki-oon","titre": "Jujutsu Kaisen"}'
+  ``` curl -X PATCH https://bookapi-v1.herokuapp.com/books/1 -H "Content-Type:application/json" -d '{"auteur": "Azychika, Takumi Fukui","editeur": "Ki-oon","titre": "Jujutsu Kaisen"}'
   ```
   ```
     {
@@ -172,7 +172,7 @@ L'API vous renvoie 4 types d'erreur:
         Cet endpoint retourne la liste des categories de livres, la valeur du succès et le total des categories disponibles. 
     
         
-    EXEMPLE: curl http://localhost:5000/categories
+    EXEMPLE: curl https://bookapi-v1.herokuapp.com/categories
 
         {
     "category": [
@@ -235,7 +235,7 @@ L'API vous renvoie 4 types d'erreur:
   GENERAL:
   Cet endpoint permet de récupérer les informations d'une categorie si elle existe par le biais de l'ID.
 
-    EXEMPLE: http://localhost:5000/categories/6
+    EXEMPLE: https://bookapi-v1.herokuapp.com/categories/6
 ```
     {
         "categorie": "Cuisine",
@@ -248,7 +248,7 @@ L'API vous renvoie 4 types d'erreur:
     GENERAL:
         Supprimer un element si l'ID existe. Retourne l'ID da la catégorie supprimé, la valeur du succès et le nouveau total.
 
-        EXEMPLE: curl -X DELETE http://localhost:5000/categories/11
+        EXEMPLE: curl -X DELETE https://bookapi-v1.herokuapp.com/categories/11
 ```
     {
         "id_cat": 11,
@@ -264,7 +264,7 @@ L'API vous renvoie 4 types d'erreur:
   Il retourne une nouvelle categorie avec la nouvelle valeur.
 
   EXEMPLE.....Avec Patch
-  ``` curl -X PATCH 'http://localhost:5000/categories/4' -H "Content-Type:application/json" -d '{"categorie": "Bandes Dessinées"}'
+  ``` curl -X PATCH 'https://bookapi-v1.herokuapp.com/categories/4' -H "Content-Type:application/json" -d '{"categorie": "Bandes Dessinées"}'
   ```
   ```
     {
@@ -277,7 +277,7 @@ L'API vous renvoie 4 types d'erreur:
   Cet endpoint permet de lister les livres appartenant à une categorie donnée.
   Il renvoie la classe de la categorie et les livres l'appartenant.
 
-    EXEMPLE: http://localhost:5000/books/categories/4
+    EXEMPLE: https://bookapi-v1.herokuapp.com/categories/4/books
 ```
     {
     "Status_code": 200,

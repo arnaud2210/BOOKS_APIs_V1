@@ -1,8 +1,9 @@
 from models import Book, Category, setup_db, db
-from flask import Flask
-from flask import jsonify, request, abort
+from flask import Flask, send_from_directory
+from flask import jsonify, request, abort,render_template
 from flask_migrate import Migrate
 from flask_cors import CORS
+from flask_swagger_ui import get_swaggerui_blueprint
 
 #############################################################
 # fonction permettant d'afficher les éléments d'une liste
@@ -40,6 +41,24 @@ def create_app(test_config=None):
             "version": 1,
             "read":"https://github.com/arnaud2210/BOOKS_APIs_V1"
         })"""
+
+    @app.route('/static/<path:path>')
+    def get_docs(path):
+        return send_from_directory('static',path)
+    
+    SWAGGER_URL = '/swagger'
+    API_URL = '/static/swagger.json'
+    swaggerui_blueprint = get_swaggerui_blueprint(
+        SWAGGER_URL,
+        API_URL,
+        config={
+            'app_name': "BOOK_API_V1"
+        }
+    )
+    app.register_blueprint(swaggerui_blueprint, url_profile=SWAGGER_URL)
+
+    #app.register_blueprint(get_book.get_blueprint())
+
 
     @app.route('/books')
     def get_books():

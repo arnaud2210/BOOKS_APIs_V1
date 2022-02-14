@@ -1,0 +1,80 @@
+{
+    "openapi":"3.0.0",
+    "info": {
+        "description":"sean",
+        "title":"bookapi",
+        "contact": {
+            "email": "adjimonarnaud@gmail.com"
+        },
+        "licence":{
+            "name":"MIT",
+            "url": "https://opensource.org/licence/MIT"
+        } 
+    },
+    "servers":[
+        {
+            "url":"https://bookapi-v1.herokuapp.com/"
+        }
+    ],
+    "tags": [
+        {
+            "name":"book",
+            "des": "exe"
+        }
+    ],
+    "paths": {
+        "/categories": {
+            "get": {
+                "tags": [
+                    "categories request"
+                ],
+                "summary": "Retourne la liste des livres",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas":{
+            "uuid": {
+                "type": "string"
+            },
+            "bookRequestPostBody": {
+                "type": "object",
+                "properties":{
+                    "title": {
+                        "type":"string",
+                        "format":"string"
+                    },
+                    "email": {
+                        "type":"string",
+                        "format":"string"
+                    }
+                },
+                "bookRequest": {
+                    "type":"object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "format": "UUID"
+                        },
+                        "title": {
+                            "type": "string",
+                            "format": "UUID"
+                        },
+                        "email": {
+                            "type": "string",
+                            "format": "UUID"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
