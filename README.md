@@ -1,6 +1,6 @@
 # BOOK API VERSION 1
 
-## Getting Started
+## Projet de construction d'une Application de Progammation d'Interface permettant de gérer les livres d'une bibliothèque. Cette API a pour but de classer les livres par catégories, de rechercher les livres par leur titre, d'enregistrer un nouveau livre, de créer des catégories.
 
 ### Installation des Dépendances
 
