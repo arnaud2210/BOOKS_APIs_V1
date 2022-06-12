@@ -186,7 +186,24 @@
                     }
                 }
             }
+        },
+
+        "/categories/{id}/books": {
+            "get": {
+                "tags": [
+                    "categories request"
+                ],
+                "summary": "afficherListeDesLivresAppartenantD'uneCategorie",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            }
         }
+        
     },
     "components": {
         "schemas":{
