@@ -18,17 +18,166 @@
     ],
     "tags": [
         {
-            "name":"book",
+            "name":"books and categories controllers",
             "des": "exe"
         }
     ],
     "paths": {
+        "/books": {
+            "get": {
+                "tags": [
+                    "books request"
+                ],
+                "summary": "listeDesLivres",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            },
+
+            "post": {
+                "tags": [
+                    "books request"
+                ],
+                "summary": "ajouterUnLivre",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            }
+        },
+
+        "/books/{id}": {
+            "get": {
+                "tags": [
+                    "books request"
+                ],
+                "summary": "afficherUnLivre",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            },
+
+            "patch": {
+                "tags": [
+                    "books request"
+                ],
+                "summary": "modifierUnLivre",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            },
+
+            "delete": {
+                "tags": [
+                    "books request"
+                ],
+                "summary": "supprimerUnlivre",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            }
+        },
+        "/books/{title}": {
+            "get": {
+                "tags": [
+                    "books request"
+                ],
+                "summary": "rechercherUnLivreParSonTitre",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            }
+        },
+
+
         "/categories": {
             "get": {
                 "tags": [
                     "categories request"
                 ],
-                "summary": "Retourne la liste des livres",
+                "summary": "afficherLesCategories",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            },
+
+            "post": {
+                "tags": [
+                    "categories request"
+                ],
+                "summary": "ajouterUneCategories",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            }
+        },
+
+
+        "/categories/{id}": {
+            "get": {
+                "tags": [
+                    "categories request"
+                ],
+                "summary": "afficherUneCategorie",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            },
+
+            "patch": {
+                "tags": [
+                    "categories request"
+                ],
+                "summary": "modifierUneCategorie",
+                "reponse": {
+                    "200": {
+                        "schema": {
+                            "$ref":"#/components/schemas/bookRequestPostBody"
+                        }
+                    }
+                }
+            },
+
+            "delete": {
+                "tags": [
+                    "categories request"
+                ],
+                "summary": "supprimerUneCategorie",
                 "reponse": {
                     "200": {
                         "schema": {
